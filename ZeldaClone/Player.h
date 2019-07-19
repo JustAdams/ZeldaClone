@@ -7,9 +7,11 @@
 #include <allegro5/allegro_ttf.h>
 #include <iostream>
 #include "Enemy.h"
+#include "Entity.h"
 #include "mappy_A5.h"
 
-class Player {
+class Player : public Entity 
+{
 
 	friend int collided(int x, int y);
 	friend bool endValue(int x, int y);
@@ -25,6 +27,7 @@ public:
 	void move(char moveDir, int xOff, int yOff, Enemy enemy[], int numEnemy);
 	bool update(int xOff, int yOff);
 	void attack(Enemy enemy[], int numEnemy);
+	void damage(Entity* source, int weaponDamage);
 	bool CollisionEndBlock();
 	void setCurrBlock();
 	int getCurrBlock() { return currBlock; }

@@ -62,7 +62,7 @@ void Enemy::attack()
 }
 
 //The player attacks the enemy
-void Enemy::damage(int weaponDamage)
+void Enemy::damage(Entity* source, int weaponDamage)
 {
 	al_play_sample(die, 1, 0, 1, ALLEGRO_PLAYMODE_ONCE, 0);
 	health -= weaponDamage;

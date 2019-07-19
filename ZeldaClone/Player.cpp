@@ -171,22 +171,22 @@ void Player::attack(Enemy enemy[], int numEnemy)
 			if (dir == 'u') {
 				if (x + 10 > enemy[i].getX() && x + 10 < enemy[i].getBoundX() &&
 					y > enemy[i].getY() && y - 20 < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			} if (dir == 'd') {
 				if (x + 10 > enemy[i].getX() && x + 10 < enemy[i].getBoundX() &&
 					y + 40 > enemy[i].getY() && y + 40 < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			} if (dir == 'l') {
 				if (x - 15 > enemy[i].getX() && x - 15 < enemy[i].getBoundX() &&
 					y > enemy[i].getY() && y - frameHeight < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			} if (dir == 'r') {
 				if (x + 40 > enemy[i].getX() && x + 40 < enemy[i].getBoundX() &&
 					y + 5 > enemy[i].getY() && y - frameHeight - 5 < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			}
 		}
@@ -197,22 +197,22 @@ void Player::attack(Enemy enemy[], int numEnemy)
 			if (dir == 'u') {
 				if (x + 10 > enemy[i].getX() && x + 10 < enemy[i].getBoundX() &&
 					y > enemy[i].getY() && y - 40 < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			} if (dir == 'd') {
 				if (x + 10 > enemy[i].getX() && x + 10 < enemy[i].getBoundX() &&
 					y + 50 > enemy[i].getY() && y + 50 < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			} if (dir == 'l') {
 				if (x - 10 > enemy[i].getX() && x - 35 < enemy[i].getBoundX() &&
 					y > enemy[i].getY() && y - frameHeight < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			} if (dir == 'r') {
 				if (x + 60 > enemy[i].getX() && x + 10 < enemy[i].getBoundX() &&
 					y + 5 > enemy[i].getY() && y - frameHeight - 5 < enemy[i].getBoundY()) {
-					enemy[i].damage(weaponDamage);
+					enemy[i].damage(this, weaponDamage);
 				}
 			}
 		}

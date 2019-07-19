@@ -5,9 +5,10 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include "mappy_A5.h"
+#include "Entity.h"
 #include <allegro5/allegro_primitives.h>
 
-class Enemy
+class Enemy : public Entity
 {
 
 	friend int collided(int x, int y);
@@ -20,7 +21,7 @@ public:
 	void move(int WIDTH, int HEIGHT);
 	void update(int xOff, int yOff, int layer);
 	void setAlive(bool value);
-	void damage(int weaponDamage);
+	void damage(Entity* source, int weaponDamage);
 	int getX() { return x; }
 	int getY() { return y; }
 	int getBoundX() { return x + frameWidth; }
