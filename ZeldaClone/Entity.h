@@ -11,8 +11,8 @@ protected:
 	int x;
 	int y;
 	int health;
+	int currBlock;
 	int speed;
-
 	bool alive;
 
 

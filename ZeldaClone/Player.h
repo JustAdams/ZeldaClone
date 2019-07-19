@@ -6,9 +6,9 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <iostream>
-#include "Enemy.h"
 #include "Entity.h"
 #include "mappy_A5.h"
+#include "Enemy.h"
 
 class Player : public Entity 
 {
@@ -19,49 +19,54 @@ class Player : public Entity
 public:
 	Player();
 	~Player();
-	void setX(int x) { this->x = x; }
-	void setY(int y) { this->y = y; }
 	int getX() { return x; }
 	int getY() { return y; }
-	int blockValueCheck();
-	void move(char moveDir, int xOff, int yOff, Enemy enemy[], int numEnemy);
-	bool update(int xOff, int yOff);
-	void attack(Enemy enemy[], int numEnemy);
-	void damage(Entity* source, int weaponDamage);
-	bool CollisionEndBlock();
-	void setCurrBlock();
+	void setX(int x) { this->x = x; }
+	void setY(int y) { this->y = y; }
+	bool getWin() { return win; }
 	int getCurrBlock() { return currBlock; }
 	int getHealth() { return health; }
 	int getLevel() { return level; }
-	void setLevel(int num) { level = num; }
+	std::string getWeaponName() { return weapon; }
+	int getWeaponDamage() { return weaponDamage; }
+
+	void attack(Enemy enemy[], int numEnemy);
+	int blockValueCheck();
+	bool CollisionEndBlock();
+	void damage(Entity* source, int weaponDamage);
+	void load();
+	void move(char moveDir, int xOff, int yOff, Enemy enemy[], int numEnemy);
 	void pickUp(int currBlock);
+	void setCurrBlock();
+	void setLevel(int num) { level = num; }
 	void statusDraw(int gameTime, int flag);
-	void levelUp();
 	void superSwordAttack(char dir, int xOff, int yOff, int attackFX);
-	bool getWin() { return win; }
+	bool update(int xOff, int yOff);
 
 private:
-	int x;
-	int y;
-	int speed; //Movement speed
-	int health; //Players health
-	int level; //Player level
+	bool alive;
+	int animColumn; //Number of columns for animation
+	int animRows; //Number of possible animations
+	int attackDelay; //How long to animate the attack action
+	bool attacking;
+	int currBlock; //Value of current block
 	int currFrame; //Currently drawn sprite frame
-	int maxFrame; //Max frame for current frame
-	int maxMoveFrame; //Max frame for movement
+	char dir; //Facing direction
 	int frameCount; //Current frame delay
 	int frameDelay; //Set delay for next current frame
 	int frameWidth; //Width of the sprite frame
 	int frameHeight; //Sprite frame height
-	int animColumn; //Number of columns for animation
-	int animRows; //Number of possible animations
-	int currBlock; //Value of current block
+	int health; //Players health
+	int level; //Player level
+	int maxFrame; //Max frame for current frame
+	int maxMoveFrame; //Max frame for movement
+	int rupees;
+	int speed; //Movement speed
 	int weaponDamage; //How much damage current weapon does
-	int attackDelay; //How long to animate the attack action
-	char dir; //Facing direction
-	bool alive;
-	bool attacking;
+	int numKeys; //Number of unused keys the player has
 	bool win; //If the player makes it to the end
+	int x;
+	int y;
 	std::string weapon; //Current equipped weapon
 	std::string tunic; //Currently worn clothing
 

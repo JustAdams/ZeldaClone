@@ -18,9 +18,11 @@ public:
 	~Enemy();
 	void spawn(int level);
 	void attack();
+	void die();
 	void move(int WIDTH, int HEIGHT);
 	void update(int xOff, int yOff, int layer);
 	void setAlive(bool value);
+	void setCurrBlock();
 	void damage(Entity* source, int weaponDamage);
 	int getX() { return x; }
 	int getY() { return y; }
@@ -36,7 +38,9 @@ private:
 	int frameHeight;
 	int animColumn; //Walking animation
 	int animRow; //Direction sprite
+	int currBlock; //Current tile the entity is on
 	int currFrame; //Currently drawn sprite frame
+	int level; //Level the enemy is spawned on
 	int maxFrame; //Max frame for current frame
 	int frameCount; //Current frame delay
 	int frameDelay; //Set delay for next current frame
@@ -46,5 +50,5 @@ private:
 	char dir;
 
 	ALLEGRO_BITMAP* image;
-	ALLEGRO_SAMPLE* die;
+	ALLEGRO_SAMPLE* dieNoise;
 };

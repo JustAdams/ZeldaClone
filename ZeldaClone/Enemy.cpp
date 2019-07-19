@@ -4,23 +4,23 @@
 Enemy::Enemy()
 {
 	alive = false;
-	health = 5;
 	speed = 20;
 	image = al_load_bitmap("enemy.png");
 	frameWidth = 26;
 	frameHeight = 26;
-	die = al_load_sample("die.wav"); //Death noise
+	dieNoise = al_load_sample("die.wav"); //Death noise
 }
 
 Enemy::~Enemy()
 {
-	al_destroy_sample(die);
+	al_destroy_sample(dieNoise);
 	al_destroy_bitmap(image);
 }
 
 //Create the enemy with given location based on the players level
 void Enemy::spawn(int level)
 {
+	this->level = level;
 	//Only spawn if not alive and haven't already been on the current layer
 	if (!alive && currLayer != level) {
 		currLayer = level;
@@ -50,7 +50,7 @@ void Enemy::spawn(int level)
 				y = (rand() % 192) + 256;
 			}
 		}
-
+		health = 5;
 		alive = true; //Set enemy to alive
 	}
 }
@@ -61,12 +61,29 @@ void Enemy::attack()
 
 }
 
+//The value of the current block
+void Enemy::setCurrBlock()
+{
+
+	BLKSTR* data;
+	data = MapGetBlock(x / mapblockwidth, y / mapblockheight);
+
+	currBlock = data->user1;
+}
+
+void Enemy::die()
+{
+	if (level == 1) { MapSetBlock(x / 32, y / 32, 595); }
+	if (level == 2) { MapSetBlock(x / 32, y / 32, 627); }
+	al_play_sample(dieNoise, 1, 0, 1, ALLEGRO_PLAYMODE_ONCE, 0);
+	alive = false;
+}
+
 //The player attacks the enemy
 void Enemy::damage(Entity* source, int weaponDamage)
 {
-	al_play_sample(die, 1, 0, 1, ALLEGRO_PLAYMODE_ONCE, 0);
+	al_play_sample(dieNoise, 1, 0, 1, ALLEGRO_PLAYMODE_ONCE, 0);
 	health -= weaponDamage;
-	if (health <= 0) { alive = false; }
 }
 
 //Random chance for enemy to move in any direction
@@ -141,6 +158,7 @@ void Enemy::move(int WIDTH, int HEIGHT)
 		x = 0;
 		y = 0;
 	}
+	setCurrBlock();
 }
 
 //Draws current location if still alive
@@ -152,12 +170,16 @@ void Enemy::update(int xOff, int yOff, int layer)
 	if (alive)
 	{
 		al_draw_bitmap_region(image, animColumn * frameWidth, animRow * frameHeight, frameWidth, frameHeight, x - xOff, y - yOff, 0);
+		if (currBlock == 50) {
+			health--;
+		}
+		if (health <= 0) { die(); }
 	}
 }
 
 void Enemy::setAlive(bool value) {
 	alive = value;
 	if (!alive) {
-		al_play_sample(die, 1, 0, .7, ALLEGRO_PLAYMODE_ONCE, 0);
+		al_play_sample(dieNoise, 1, 0, .7, ALLEGRO_PLAYMODE_ONCE, 0);
 	}
 }

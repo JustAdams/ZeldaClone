@@ -89,6 +89,7 @@ int main()
 
 	//Player setup
 	Player player;
+	player.load(); //Load player assets
 	Enemy enemy[numEnemy];
 
 	//--------------------------------------STARTUP END
