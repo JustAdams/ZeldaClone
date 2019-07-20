@@ -5,6 +5,7 @@ Enemy::Enemy()
 {
 	alive = false;
 	speed = 20;
+	maxHealth = 5;
 	image = al_load_bitmap("enemy.png");
 	frameWidth = 26;
 	frameHeight = 26;
@@ -50,7 +51,7 @@ void Enemy::spawn(int level)
 				y = (rand() % 192) + 256;
 			}
 		}
-		health = 5;
+		health = maxHealth;
 		alive = true; //Set enemy to alive
 	}
 }
@@ -95,13 +96,13 @@ void Enemy::move(int WIDTH, int HEIGHT)
 		int oldY = y;
 		if (rand() % 50 == 0) {
 			animColumn = rand() % 2;
-			int randMove = rand() % 3; //Random number for movement 0 - No move / 1 - X move / 2 - Y move
+			int randMove = rand() % 5; //Random number for movement 0 - No move / 1 or 2 - X move / 3 or 4 - Y move
 			int randDir = rand() % 2; //Random direction, 0 - Positive / 1 - Negative
 			if (randDir == 1) { speed = -speed; }
 			if (randMove == 0) {
 
 			}
-			else if (randMove == 1) {
+			else if (randMove == 1 || randMove == 2) {
 				x += speed;
 				if (speed >= 0) {
 					dir = 'r';
@@ -112,7 +113,7 @@ void Enemy::move(int WIDTH, int HEIGHT)
 					animRow = 1;
 				}
 			}
-			else if (randMove == 2) {
+			else if (randMove == 3 || randMove == 4) {
 				y += speed;
 				if (speed >= 0) {
 					dir = 'd';

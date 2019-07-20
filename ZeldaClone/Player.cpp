@@ -5,7 +5,6 @@
 Player::Player() {
 	dir = 'd';
 	speed = 3;
-	health = 5;
 	level = 1;
 	animColumn = 0;
 	animRows = 2;
@@ -17,16 +16,10 @@ Player::Player() {
 	frameWidth = 25;
 	frameHeight = 25;
 	attackDelay = 0;
-	attacking = false;
-	alive = true;
-	win = false;
-	currBlock = NULL;
 	weapon = "unarmed";
 	weaponDamage = 0;
 	tunic = "green";
-
-	x = 64;
-	y = 1504;
+	maxHealth = 5;
 	rupees = 0;
 }
 
@@ -283,6 +276,17 @@ void Player::move(char moveDir, int xOff, int yOff, Enemy enemy[], int numEnemy)
 
 }
 
+void Player::spawn(int x, int y)
+{
+	this->x = x;
+	this->y = y;
+	health = maxHealth;
+	attacking = false;
+	alive = true;
+	win = false;
+	currBlock = NULL;
+}
+
 //Check current block value and pickup items or change layers
 void Player::pickUp(int currBlock)
 {
@@ -380,11 +384,6 @@ void Player::statusDraw(int gameTime, int flag)
 	}
 	al_draw_textf(statusFont, al_map_rgb(255, 255, 255), 10, 525, 0, "CURRENT LEVEL: %d", level);
 	al_draw_textf(statusFont, al_map_rgb(255, 255, 255), 10, 540, 0, "TIME REMAINING: %d", 180 - gameTime);
-
-	//End of game flag
-	if (flag == 1) {
-		al_draw_textf(statusFont, al_map_rgb(255, 255, 255), 200, 540, 0, "TOTAL GAME TIME: %d", gameTime);
-	}
 
 }
 

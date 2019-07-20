@@ -10,6 +10,7 @@ public:
 protected:
 	int x;
 	int y;
+	int maxHealth;
 	int health;
 	int currBlock;
 	int speed;

@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "mappy_A5.h"
 #include "Enemy.h"
+#include <vector>
 
 class Player : public Entity 
 {
@@ -27,6 +28,7 @@ public:
 	int getCurrBlock() { return currBlock; }
 	int getHealth() { return health; }
 	int getLevel() { return level; }
+	int getRupees() { return rupees; }
 	std::string getWeaponName() { return weapon; }
 	int getWeaponDamage() { return weaponDamage; }
 
@@ -34,11 +36,12 @@ public:
 	int blockValueCheck();
 	bool CollisionEndBlock();
 	void damage(Entity* source, int weaponDamage);
-	void load();
+	void load(); //Load all of the player assets
 	void move(char moveDir, int xOff, int yOff, Enemy enemy[], int numEnemy);
 	void pickUp(int currBlock);
 	void setCurrBlock();
 	void setLevel(int num) { level = num; }
+	void spawn(int x, int y); //Spawns the player on a new game
 	void statusDraw(int gameTime, int flag);
 	void superSwordAttack(char dir, int xOff, int yOff, int attackFX);
 	bool update(int xOff, int yOff);
@@ -56,6 +59,7 @@ private:
 	int frameDelay; //Set delay for next current frame
 	int frameWidth; //Width of the sprite frame
 	int frameHeight; //Sprite frame height
+	int maxHealth; //Limit to player health
 	int health; //Players health
 	int level; //Player level
 	int maxFrame; //Max frame for current frame
@@ -69,6 +73,7 @@ private:
 	int y;
 	std::string weapon; //Current equipped weapon
 	std::string tunic; //Currently worn clothing
+	std::vector<std::string> treasureList;
 
 	ALLEGRO_FONT* statusFont;
 	ALLEGRO_BITMAP* dude;

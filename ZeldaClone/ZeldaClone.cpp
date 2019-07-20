@@ -80,6 +80,7 @@ int main()
 	al_init_font_addon();
 	al_init_ttf_addon();
 	ALLEGRO_FONT* gameFont = al_load_font("gameFont.ttf", 12, 0);
+	ALLEGRO_FONT* creditFont = al_load_font("creditFont.ttf", 24, 0);
 
 	//Event setup
 	ALLEGRO_EVENT ev;
@@ -90,6 +91,7 @@ int main()
 	//Player setup
 	Player player;
 	player.load(); //Load player assets
+	player.spawn(64, 1504); //Spawn the player
 	Enemy enemy[numEnemy];
 
 	//--------------------------------------STARTUP END
@@ -296,6 +298,14 @@ int main()
 		MapDrawFG(xOff, yOff, 0, 0, WIDTH, PLAYHEIGHT, 1);
 		al_draw_tinted_bitmap(endLose, al_map_rgba_f(1, 1, 1, .75), player.getX() - xOff, PLAYHEIGHT / 4, 0);
 	}
+	al_flip_display();
+	al_rest(3);
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	al_flip_display();
+	//End Credits
+	al_draw_text(creditFont, al_map_rgb(255, 255, 255), 350, 100, 0, "GAME RESULTS");
+	al_draw_textf(creditFont, al_map_rgb(255, 255, 255), 100, 200, 0, "TOTAL TIME: %d", gameTime);
+	al_draw_textf(creditFont, al_map_rgb(255, 255, 255), 500, 200, 0, "RUPEES: %d", player.getRupees());
 	al_flip_display();
 	al_rest(5);
 

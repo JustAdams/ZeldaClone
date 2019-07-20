@@ -44,6 +44,7 @@ private:
 	int maxFrame; //Max frame for current frame
 	int frameCount; //Current frame delay
 	int frameDelay; //Set delay for next current frame
+	int maxHealth;
 	int health;
 	int currLayer;
 	bool alive = false;
