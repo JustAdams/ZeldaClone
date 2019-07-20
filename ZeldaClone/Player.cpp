@@ -276,6 +276,7 @@ void Player::move(char moveDir, int xOff, int yOff, Enemy enemy[], int numEnemy)
 
 }
 
+//Starts player in the game
 void Player::spawn(int x, int y)
 {
 	this->x = x;
@@ -309,10 +310,13 @@ void Player::pickUp(int currBlock)
 		weaponDamage = 3;
 		break;
 	case 62: //Heart pickup grass
-		if (level == 1) { MapSetBlock(x / 32, y / 32, 354); } //Grass tile
-		else if (level == 2) { MapSetBlock(x / 32, y / 32, 165); } //Dirt tile
-		al_play_sample(pickup, 1, 0, 1.5, ALLEGRO_PLAYMODE_ONCE, 0);
-		health++;
+		if (health < maxHealth)
+		{
+			if (level == 1) { MapSetBlock(x / 32, y / 32, 354); } //Grass tile
+			else if (level == 2) { MapSetBlock(x / 32, y / 32, 165); } //Dirt tile
+			al_play_sample(pickup, 1, 0, 1.5, ALLEGRO_PLAYMODE_ONCE, 0);
+			health++;
+		}
 		break;
 	case 63: //Super sword pickup
 		MapSetBlock(x / 32, y / 32, 165); //Change sword tile into ground
@@ -328,6 +332,7 @@ void Player::pickUp(int currBlock)
 	case 66: //Rupee pickup
 		if (level == 1) { MapSetBlock(x / 32, y / 32, 354); } //Replace with grass tile
 		else if (level == 2) { MapSetBlock(x / 32, y / 32, 165); } //Replace with dirt tile
+		else if (level == 3) { MapSetBlock(x / 32, y / 32, 670); }
 		al_play_sample(pickup, 1, 0, 1.5, ALLEGRO_PLAYMODE_ONCE, 0);
 		rupees++;
 		break;
@@ -340,7 +345,7 @@ void Player::pickUp(int currBlock)
 }
 
 
-//The value of the current block
+//The value of the current block the player is on
 void Player::setCurrBlock()
 {
 

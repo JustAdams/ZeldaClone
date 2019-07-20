@@ -303,9 +303,19 @@ int main()
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	al_flip_display();
 	//End Credits
-	al_draw_text(creditFont, al_map_rgb(255, 255, 255), 350, 100, 0, "GAME RESULTS");
+	al_draw_text(creditFont, al_map_rgb(255, 255, 255), 370, 100, 0, "GAME RESULTS");
 	al_draw_textf(creditFont, al_map_rgb(255, 255, 255), 100, 200, 0, "TOTAL TIME: %d", gameTime);
 	al_draw_textf(creditFont, al_map_rgb(255, 255, 255), 500, 200, 0, "RUPEES: %d", player.getRupees());
+	al_draw_text(creditFont, al_map_rgb(255, 255, 255), 250, 300, 0, "RESULTS: ");
+	if (player.getRupees() > 20) {
+		al_draw_text(creditFont, al_map_rgb(100, 255, 100), 380, 300, 0, "GREAT JOB HERO!");
+	}
+	else if (player.getRupees() > 10) {
+		al_draw_text(creditFont, al_map_rgb(100, 100, 255), 380, 300, 0, "ALMOST A HERO!");
+	}
+	else {
+		al_draw_text(creditFont, al_map_rgb(255, 100, 100), 380, 300, 0, "YOU'RE NO HERO...");
+	}
 	al_flip_display();
 	al_rest(5);
 

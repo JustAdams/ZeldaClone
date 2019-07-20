@@ -57,11 +57,6 @@ void Enemy::spawn(int level)
 }
 
 
-void Enemy::attack()
-{
-
-}
-
 //The value of the current block
 void Enemy::setCurrBlock()
 {
@@ -72,10 +67,12 @@ void Enemy::setCurrBlock()
 	currBlock = data->user1;
 }
 
+//When enough damage is taken, the enemy dies and drops a rupee
 void Enemy::die()
 {
 	if (level == 1) { MapSetBlock(x / 32, y / 32, 595); }
 	if (level == 2) { MapSetBlock(x / 32, y / 32, 627); }
+	if (level == 3) { MapSetBlock(x / 32, y / 32, 659); }
 	al_play_sample(dieNoise, 1, 0, 1, ALLEGRO_PLAYMODE_ONCE, 0);
 	alive = false;
 }

@@ -17,7 +17,6 @@ public:
 	Enemy();
 	~Enemy();
 	void spawn(int level);
-	void attack();
 	void die();
 	void move(int WIDTH, int HEIGHT);
 	void update(int xOff, int yOff, int layer);
